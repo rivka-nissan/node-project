@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הוספת נעל חדשה</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+    input, select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .back-link a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>➕ הוסף נעל חדשה</h1>
+    
+    <form action="/add-shoe" method="POST">
+      <div>
+        <label for="name">שם הנעל *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div>
+        <label for="brand">מותג *</label>
+        <input type="text" id="brand" name="brand" required>
+      </div>
+
+      <div>
+        <label for="price">מחיר *</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+      </div>
+
+      <div>
+        <label for="size">מידה *</label>
+        <input type="number" id="size" name="size" required>
+      </div>
+
+      <div>
+        <label for="color">צבע</label>
+        <input type="text" id="color" name="color">
+      </div>
+
+      <div>
+        <label for="category">קטגוריה</label>
+        <select id="category" name="category">
+          <option value="ספורט">ספורט</option>
+          <option value="אלגנט">אלגנט</option>
+          <option value="סנדלים">סנדלים</option>
+          <option value="מגפיים">מגפיים</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="image">קישור לתמונה</label>
+        <input type="text" id="image" name="image" placeholder="https://example.com/image.jpg">
+      </div>
+
+      <div>
+        <label for="inStock">במלאי?</label>
+        <select id="inStock" name="inStock">
+          <option value="true">כן</option>
+          <option value="false">לא</option>
+        </select>
+      </div>
+
+      <button type="submit">💾 שמור נעל</button>
+    </form>
+
+    <div class="back-link">
+      <a href="/">← חזרה לדף הבית</a>
+    </div>
+  </div>
+</body>
+</html>

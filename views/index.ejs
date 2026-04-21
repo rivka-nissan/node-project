@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חנות נעליים</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .subtitle {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #34495e;
+      font-size: 2em;
+      margin: 40px 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #3498db;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 20px 5px;
+      font-weight: bold;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .btn-container {
+      text-align: center;
+    }
+    .shoes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .shoe-card {
+      background: white;
+      border: none;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .shoe-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .shoe-card img {
+      max-width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .shoe-card h3 {
+      margin: 15px 0;
+      color: #2c3e50;
+      font-size: 1.5em;
+    }
+    .shoe-card p {
+      color: #7f8c8d;
+      margin: 8px 0;
+      font-size: 1.1em;
+    }
+    .price {
+      color: #e74c3c;
+      font-size: 2em;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .badge.in-stock {
+      background: #2ecc71;
+      color: white;
+    }
+    .badge.out-of-stock {
+      background: #e74c3c;
+      color: white;
+    }
+    .users-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .users-table th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px;
+      text-align: right;
+      font-size: 1.1em;
+    }
+    .users-table td {
+      padding: 15px;
+      text-align: right;
+      border-bottom: 1px solid #ecf0f1;
+    }
+    .users-table tr:hover {
+      background-color: #f8f9fa;
+    }
+    .users-table tr:last-child td {
+      border-bottom: none;
+    }
+    .role-badge {
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .role-admin {
+      background: #f39c12;
+      color: white;
+    }
+    .role-user {
+      background: #3498db;
+      color: white;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #95a5a6;
+      font-size: 1.3em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>👟 חנות הנעליים שלנו</h1>
+    <p class="subtitle">ברוכים הבאים לחנות הנעליים הטובה ביותר!</p>
+    
+    <div class="btn-container">
+      <a href="/add-shoe" class="btn">➕ הוסף נעל חדשה</a>
+    </div>
+    
+    <h2>👟 הנעליים שלנו</h2>
+    <div class="shoes-grid">
+      <% if (shoes && shoes.length > 0) { %>
+        <% shoes.forEach(shoe => { %>
+          <div class="shoe-card">
+            <img src="<%= shoe.image || 'https://via.placeholder.com/280x220/667eea/ffffff?text=נעל' %>" alt="<%= shoe.name %>">
+            <h3><%= shoe.name %></h3>
+            <p><strong>מותג:</strong> <%= shoe.brand %></p>
+            <p><strong>מידה:</strong> <%= shoe.size %> | <strong>צבע:</strong> <%= shoe.color %></p>
+            <p class="price">₪<%= shoe.price.toFixed(2) %></p>
+            <span class="badge <%= shoe.inStock ? 'in-stock' : 'out-of-stock' %>">
+              <%= shoe.inStock ? '✅ במלאי' : '❌ אזל מהמלאי' %>
+            </span>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="empty-state" style="grid-column: 1/-1;">
+          🛍️ אין נעליים להצגה כרגע
+        </div>
+      <% } %>
+    </div>
+
+    <h2>👥 המשתמשים שלנו</h2>
+    <% if (users && users.length > 0) { %>
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>שם משתמש</th>
+            <th>אימייל</th>
+            <th>תפקיד</th>
+            <th>תאריך יצירה</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><strong><%= user.username %></strong></td>
+              <td><%= user.email %></td>
+              <td>
+                <span class="role-badge <%= user.role === 'admin' ? 'role-admin' : 'role-user' %>">
+                  <%= user.role === 'admin' ? '🔑 מנהל' : '👤 משתמש' %>
+                </span>
+              </td>
+              <td><%= new Date(user.createdAt).toLocaleDateString('he-IL') %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <div class="empty-state">
+        👤 אין משתמשים כרגע
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
